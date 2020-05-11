@@ -9,6 +9,10 @@ class ChromiumWebPage(QWebEnginePage):
         self.verbosity = verbosity
         profile.setParent(self)
 
+    def certificateError(self, error):
+        log.msg("certificateError: %s" % (error.errorDescription(),))
+        return True
+
     def javaScriptAlert(self, url, msg):
         # TODO: callback
         if self.verbosity > 1:
